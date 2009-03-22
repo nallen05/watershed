@@ -1,0 +1,130 @@
+
+ The "color of the bikeshed" is a proverbial phrase referring to the apparent ease with
+ which one can get agreement on building a large and complex project (such as a billion-
+ dollar atomic reactor) compared to the difficulty of reaching consensus on building
+ something conceptually simple — because everyone involved actually has an opinion and
+ wants to add it.
+
+ --http://en.wikipedia.org/wiki/Color_of_the_bikeshed
+
+generating html with lisp is simple. very simple. in fact it's so simple that everyone
+has an opinion on it. html-bikeshed is one of many options available for generating
+html with lisp
+
+some other options are:
+
+   -cl-who <http://www.weitz.de/cl-who/>
+   -htmlgen <p://www.weitz.de/cl-who/>
+   -htout <http://www.cliki.net/htout>
+   -html-template <http://www.weitz.de/html-template/>
+   -yacml <http://common-lisp.net/project/bese/yaclml.html>
+   -cl-emb <http://common-lisp.net/project/cl-emb/examples.html>
+   -lsp <http://lemonodor.com/archives/000128.html>
+
+the advantages of html-bikeshed are:
+
+   -it is trivial to take static html files and turn them into fast lisp functions that
+    produce dynamic web pages
+   -it is very simple. there is almost no learning involved
+   -it comes with a cool emacs mode
+
+IMPLEMENTATION
+
+html-bikeshed requires the following lisp libraries
+
+   -trivial-utf-8    <http://common-lisp.net/project/trivial-utf-8/>
+
+"lhp-mode.el" contains the source to an emacs mode for editing lhp files and should be
+included with "lhp.lisp"
+	 
+instead of embedding <?php ... ?> elements in the HTML like php, lhp simply uses #\( and #\)
+to switch in and out of lisp mode. it also supports a special lisp operator LHP to switch back
+to html mode from lisp mode
+
+use the #\\\ character to insert literal #\), #\(, or #\\ characters
+
+the following php:
+
+   <html>
+     <head>
+       <title>test</title>
+     </head>
+     <body>
+       <?php echo '<p>Hello World</p>'; ?>
+     </body>
+   </html>
+
+is like the following lhp:
+
+   <html>
+     <head>
+       <title>test</title>
+     </head>
+     <body>
+       (format *html-output* "<p>Hello World</p>")
+     </body>
+   </html>
+
+(of course you'd probably want to use one of the template functions, not FORMAT to write to
+the user's browser...)
+
+you could also write something like
+
+   <html>
+     <head>
+       <title>test</title>
+     </head>
+     <body>
+       (progn 
+   
+            ;; in lisp mode
+            (lhp
+   
+   	       <!-- back in html mode -->
+   	       <p>Hello (format *html-output* "~A" place)</p>
+   
+   	    ))
+     </body>
+   </html>
+
+if you wanted to
+
+ENCODING
+
+everything is assumed to be in utf-8 and served as utf-8
+
+TEMPLATE API
+
+variable
+*html-output*
+
+   bound to an output stream. write to this to write directly to a user's browser
+
+function
+raw (thing)
+
+   PRINCs `THING' to *HTML-OUTPUT*
+
+function
+he (thing)
+
+   PRINCs `THING' to *HTML-OUTPUT*, html-escaping it on the way out
+
+function
+ue (thing)
+
+   PRINCs `THING' to *HTML-OUTPUT*, url-encoding it on the way out
+
+special operator
+lhp (&rest html)
+
+   this "special operator" sends the parser into html mode until it sees a terminating,
+   unescaped #\) character
+
+
+;; Q: UTF-8 STRINGS BREAK MY SLIME / EMACS
+
+;; A: try putting this in your .emacs file:
+
+;;       (set-language-environment "UTF-8")
+;;       (setq slime-net-coding-system 'utf-8-unix)
