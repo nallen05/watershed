@@ -5,7 +5,7 @@
 >  content can be generally defined as having nudity, explicit sexual intercourse,
 >  graphic violence, strong language, or drug references or use.
  
-   _--http://en.wikipedia.org/wiki/Watershed_(television)_
+   _--http://en.wikipedia.org/wiki/Watershed\_(television)_
  
  _Watershed_ is a down and dirty way of producing HTML with lisp. Its goal is to
  be the fasted possible path from static html to dynamicly generated webpage.
@@ -73,7 +73,7 @@ So you could use something like:
       </body>
     </html>
  
-Use the escape character `\` to insert literal `)`, `(`, or `\` characters.
+Use the escape character `\\` to insert literal `)`, `(`, or `\` characters.
  
 ## PACKAGES
  
@@ -85,7 +85,7 @@ which uses `:CL` and `:WATERSHED` and exports nothing.
  
 ## ENCODING
  
-Watershed'assumes template files are encoded in UTF-8.
+Watershed assumes template files are encoded in UTF-8.
  
 ## EMACS MODE
  
@@ -153,7 +153,7 @@ Put  this in your .emacs file:
    _Function_. `PRINC`'s `THING` to a string then url-encodes it.
  
     _Note: assumes UTF-8 so be careful if seen around `HUNCHENTOOT:URL-DECODE`, 
-    which probably assumes LATIN-1 by default (see `HUCHENTOOT:*DEFAULT-EXTERNAL-FORAT*`).
+    which probably assumes LATIN-1 by default (see `HUCHENTOOT:*DEFAULT-EXTERNAL-FORAT*`)._
  
 * `UD (STRING)`
 
