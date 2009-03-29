@@ -5,7 +5,7 @@
 >  content can be generally defined as having nudity, explicit sexual intercourse,
 >  graphic violence, strong language, or drug references or use.
  
-     --http://en.wikipedia.org/wiki/Watershed_(television)
+   _--http://en.wikipedia.org/wiki/Watershed_(television)_
  
  _Watershed_ is a down and dirty way of producing HTML with lisp. Its goal is to
  be the fasted possible path from static html to dynamicly generated webpage.
@@ -98,7 +98,7 @@ etc, inside templates.
  
 It should also come with "superior-watershed-mode.el" which provides the elisp
 function `WATERSHED-COMPILE-BUFFER`, which compiles a watershed template buffer with
-with SLIME (like `SLIME-COMPILE-FILE` except no fasl involved] and displays the notes.
+with SLIME (like `SLIME-COMPILE-FILE` except no fasl involved) and displays the notes.
 
 _note: I have not used watershed since switching to Djula, the slime/emacs
 funcionality is currently broken if I remember correctly :-/ --Nick_
